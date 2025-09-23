@@ -82,11 +82,12 @@ export function Header({ onMenuClick }: HeaderProps) {
           {/* Profile Menu */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="relative h-8 w-8 rounded-full">
-                <div className="h-8 w-8 rounded-full gradient-primary flex items-center justify-center">
-                  <span className="text-sm font-semibold text-primary-foreground">A</span>
-                </div>
-              </Button>
+             <Button variant="ghost" size="sm" className="p-0" >
+  <div className="w-8 h-8 rounded-full hover:rounded-full gradient-primary flex items-center justify-center">
+    <span className="text-md font-medium text-primary-foreground">A</span>
+  </div>
+</Button>
+
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Admin Account</DropdownMenuLabel>

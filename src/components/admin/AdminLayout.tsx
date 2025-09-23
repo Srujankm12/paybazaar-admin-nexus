@@ -7,13 +7,14 @@ export function AdminLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="flex min-h-screen bg-background">
+      {/* Sidebar (hidden on mobile, fixed width on desktop) */}
       <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
-      
-      <div className="lg:pl-64">
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col">
         <Header onMenuClick={() => setSidebarOpen(true)} />
-        
-        <main className="p-4 lg:p-6">
+        <main className="p-4 lg:p-6 flex-1 overflow-y-auto">
           <Outlet />
         </main>
       </div>

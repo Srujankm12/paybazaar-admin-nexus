@@ -12,8 +12,6 @@ import {
   FileText
 } from 'lucide-react';
 import {
-  LineChart,
-  Line,
   AreaChart,
   Area,
   BarChart,
@@ -88,7 +86,7 @@ const stats = [
 
 export function Dashboard() {
   return (
-    <div className="space-y-6">
+  <div className="container mx-auto px-4 space-y-8">
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>

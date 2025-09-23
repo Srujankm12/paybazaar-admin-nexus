@@ -12,6 +12,10 @@ import { CommissionSystem } from "./components/admin/CommissionSystem";
 import { KYCVerification } from "./components/admin/KYCVerification";
 import { APIManagement } from "./components/admin/APIManagement";
 import NotFound from "./pages/NotFound";
+import { Security } from "./components/admin/Security";
+import { Analytics } from "./components/admin/Analytics";
+import { ActivityLogs } from "./components/admin/ActivityLog";
+import { SupportQueries } from "./components/admin/Support";
 
 const queryClient = new QueryClient();
 
@@ -30,10 +34,10 @@ const App = () => (
             <Route path="commission" element={<CommissionSystem />} />
             <Route path="kyc" element={<KYCVerification />} />
             <Route path="api" element={<APIManagement />} />
-            <Route path="support" element={<div className="p-6 text-center text-muted-foreground">Support Queries (Coming Soon)</div>} />
-            <Route path="activity" element={<div className="p-6 text-center text-muted-foreground">Activity Logs (Coming Soon)</div>} />
-            <Route path="analytics" element={<div className="p-6 text-center text-muted-foreground">Analytics (Coming Soon)</div>} />
-            <Route path="security" element={<div className="p-6 text-center text-muted-foreground">Security (Coming Soon)</div>} />
+            <Route path="support" element={<SupportQueries/>} />
+            <Route path="activity" element={<ActivityLogs/>} />
+            <Route path="analytics" element={<Analytics/>} />
+            <Route path="security" element={<Security/>} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

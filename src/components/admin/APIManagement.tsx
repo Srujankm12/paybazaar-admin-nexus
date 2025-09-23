@@ -258,14 +258,7 @@ export function APIManagement() {
           <p className="text-muted-foreground mt-2">Manage API credentials and endpoints</p>
         </div>
         <div className="flex flex-wrap gap-3">
-          <Button variant="outline">
-            <Download className="mr-2 h-4 w-4" />
-            Download SDK
-          </Button>
-          <Button variant="outline">
-            <FileText className="mr-2 h-4 w-4" />
-            API Documentation
-          </Button>
+        
           <Button className="gradient-primary text-primary-foreground shadow-glow">
             <Plus className="mr-2 h-4 w-4" />
             Generate API Key
@@ -329,10 +322,9 @@ export function APIManagement() {
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="credentials" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="credentials">API Credentials</TabsTrigger>
               <TabsTrigger value="endpoints">Endpoints</TabsTrigger>
-              <TabsTrigger value="documentation">Documentation</TabsTrigger>
             </TabsList>
             
             <TabsContent value="credentials" className="mt-6">
@@ -521,100 +513,7 @@ export function APIManagement() {
               </div>
             </TabsContent>
             
-            <TabsContent value="documentation" className="mt-6">
-              <div className="space-y-6">
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                  <Card className="shadow-card hover:shadow-elevated transition-all duration-200">
-                    <CardContent className="p-6">
-                      <div className="flex items-center space-x-3 mb-4">
-                        <FileText className="h-6 w-6 text-primary" />
-                        <h3 className="font-semibold">API Documentation</h3>
-                      </div>
-                      <p className="text-sm text-muted-foreground mb-4">
-                        Complete API reference with examples and integration guides.
-                      </p>
-                      <Button variant="outline" className="w-full">
-                        <Download className="mr-2 h-4 w-4" />
-                        Download PDF
-                      </Button>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="shadow-card hover:shadow-elevated transition-all duration-200">
-                    <CardContent className="p-6">
-                      <div className="flex items-center space-x-3 mb-4">
-                        <Code className="h-6 w-6 text-accent" />
-                        <h3 className="font-semibold">SDK Downloads</h3>
-                      </div>
-                      <p className="text-sm text-muted-foreground mb-4">
-                        Pre-built SDKs for popular programming languages.
-                      </p>
-                      <Button variant="outline" className="w-full">
-                        <Download className="mr-2 h-4 w-4" />
-                        Download SDK
-                      </Button>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="shadow-card hover:shadow-elevated transition-all duration-200">
-                    <CardContent className="p-6">
-                      <div className="flex items-center space-x-3 mb-4">
-                        <Zap className="h-6 w-6 text-warning" />
-                        <h3 className="font-semibold">Postman Collection</h3>
-                      </div>
-                      <p className="text-sm text-muted-foreground mb-4">
-                        Ready-to-use Postman collection for testing APIs.
-                      </p>
-                      <Button variant="outline" className="w-full">
-                        <Download className="mr-2 h-4 w-4" />
-                        Import Collection
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                <Card className="shadow-card">
-                  <CardHeader>
-                    <CardTitle className="font-poppins">Integration Guide</CardTitle>
-                    <CardDescription>Quick start guide for API integration</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="space-y-2">
-                      <h4 className="font-semibold">1. Authentication</h4>
-                      <p className="text-sm text-muted-foreground">Use your API key and secret key for authentication.</p>
-                      <div className="bg-muted p-3 rounded-lg">
-                        <code className="text-sm">
-                          Authorization: Bearer your-api-key<br />
-                          X-Secret-Key: your-secret-key
-                        </code>
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <h4 className="font-semibold">2. Base URL</h4>
-                      <p className="text-sm text-muted-foreground">All API requests should be made to:</p>
-                      <div className="bg-muted p-3 rounded-lg">
-                        <code className="text-sm">https://api.paybazaar.com/v1</code>
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <h4 className="font-semibold">3. Example Request</h4>
-                      <p className="text-sm text-muted-foreground">Sample DMT transfer request:</p>
-                      <div className="bg-muted p-3 rounded-lg">
-                        <code className="text-sm">
-                          curl -X POST https://api.paybazaar.com/v1/dmt/transfer \<br />
-                          &nbsp;&nbsp;-H "Authorization: Bearer your-api-key" \<br />
-                          &nbsp;&nbsp;-H "X-Secret-Key: your-secret-key" \<br />
-                          &nbsp;&nbsp;-H "Content-Type: application/json" \<br />
-                          &nbsp;&nbsp;-d '{"{"}amount": 1000, "recipient": "1234567890"{"}"}'
-                        </code>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </TabsContent>
+            
           </Tabs>
         </CardContent>
       </Card>
