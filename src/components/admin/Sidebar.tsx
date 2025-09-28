@@ -14,7 +14,17 @@ import {
   X,
   CreditCard,
   BarChart3,
-  Shield
+  Shield,
+  Wallet,
+  ChevronDown,
+  ChevronRight,
+  History,
+  Send,
+  ArrowLeftRight,
+  RotateCcw,
+  Edit,
+  Undo,
+  MapPin
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -33,6 +43,16 @@ const navigation = [
   { name: 'Security', href: '/admin/security', icon: Shield },
 ];
 
+const fundsSubMenu = [
+  { name: 'E-Wallet History', href: '/admin/funds/history', icon: History },
+  { name: 'E-Wallet Request', href: '/admin/funds/request', icon: Send },
+  { name: 'E-Wallet Transfer', href: '/admin/funds/transfer', icon: ArrowLeftRight },
+  { name: 'E-Wallet Request Reversal', href: '/admin/funds/reversal', icon: RotateCcw },
+  { name: 'E-Wallet Request Edit', href: '/admin/funds/edit', icon: Edit },
+  { name: 'Amount Revert', href: '/admin/funds/revert', icon: Undo },
+  { name: 'Bank Mapping', href: '/admin/funds/mapping', icon: MapPin },
+];
+
 interface SidebarProps {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
@@ -40,6 +60,7 @@ interface SidebarProps {
 
 export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
   const location = useLocation();
+  const [fundsExpanded, setFundsExpanded] = useState(false);
   
   const isActive = (path: string) => {
     if (path === '/admin') {
@@ -47,6 +68,8 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
     }
     return location.pathname.startsWith(path);
   };
+
+  const isFundsActive = location.pathname.startsWith('/admin/funds');
 
   return (
     <>
@@ -107,6 +130,60 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
                 </NavLink>
               );
             })}
+
+            {/* Funds Dropdown */}
+            <div className="space-y-1">
+              <button
+                onClick={() => setFundsExpanded(!fundsExpanded)}
+                className={cn(
+                  "group flex items-center justify-between w-full px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-200",
+                  isFundsActive
+                    ? "gradient-primary text-primary-foreground shadow-glow"
+                    : "text-muted-foreground hover:bg-secondary hover:text-secondary-foreground"
+                )}
+              >
+                <div className="flex items-center">
+                  <Wallet className={cn(
+                    "mr-3 h-5 w-5 flex-shrink-0 transition-colors",
+                    isFundsActive ? "text-primary-foreground" : "text-muted-foreground group-hover:text-secondary-foreground"
+                  )} />
+                  Funds
+                </div>
+                {fundsExpanded ? (
+                  <ChevronDown className="h-4 w-4" />
+                ) : (
+                  <ChevronRight className="h-4 w-4" />
+                )}
+              </button>
+
+              {/* Funds Submenu */}
+              {fundsExpanded && (
+                <div className="ml-6 space-y-1">
+                  {fundsSubMenu.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <NavLink
+                        key={item.name}
+                        to={item.href}
+                        className={cn(
+                          "group flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200",
+                          isActive(item.href)
+                            ? "bg-primary/10 text-primary border-l-2 border-primary"
+                            : "text-muted-foreground hover:bg-secondary/50 hover:text-secondary-foreground"
+                        )}
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <Icon className={cn(
+                          "mr-3 h-4 w-4 flex-shrink-0 transition-colors",
+                          isActive(item.href) ? "text-primary" : "text-muted-foreground group-hover:text-secondary-foreground"
+                        )} />
+                        {item.name}
+                      </NavLink>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </nav>
 
           {/* Admin Profile */}
