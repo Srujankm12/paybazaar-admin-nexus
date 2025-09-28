@@ -345,21 +345,22 @@ export function APIManagement() {
                 </div>
 
                 {/* Credentials Table */}
-                <div className="overflow-x-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Credential Name</TableHead>
-                        <TableHead>User</TableHead>
-                        <TableHead>Service Type</TableHead>
-                        <TableHead>Environment</TableHead>
-                        <TableHead>API Key</TableHead>
-                        <TableHead>Secret Key</TableHead>
-                        <TableHead>Status</TableHead>
-                        <TableHead>Usage</TableHead>
-                        <TableHead>Actions</TableHead>
-                      </TableRow>
-                    </TableHeader>
+                <div className="rounded-md border">
+                  <div className="overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="min-w-[200px]">Credential Name</TableHead>
+                          <TableHead className="min-w-[150px]">User</TableHead>
+                          <TableHead className="min-w-[120px]">Service Type</TableHead>
+                          <TableHead className="min-w-[120px]">Environment</TableHead>
+                          <TableHead className="min-w-[250px]">API Key</TableHead>
+                          <TableHead className="min-w-[250px]">Secret Key</TableHead>
+                          <TableHead className="min-w-[100px]">Status</TableHead>
+                          <TableHead className="min-w-[120px]">Usage</TableHead>
+                          <TableHead className="min-w-[120px]">Actions</TableHead>
+                        </TableRow>
+                      </TableHeader>
                     <TableBody>
                       {filteredCredentials.map((credential) => (
                         <TableRow key={credential.id}>
@@ -432,27 +433,29 @@ export function APIManagement() {
                         </TableRow>
                       ))}
                     </TableBody>
-                  </Table>
+                    </Table>
+                  </div>
                 </div>
               </div>
             </TabsContent>
             
             <TabsContent value="endpoints" className="mt-6">
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Endpoint Name</TableHead>
-                      <TableHead>URL</TableHead>
-                      <TableHead>Method</TableHead>
-                      <TableHead>Service</TableHead>
-                      <TableHead>Version</TableHead>
-                      <TableHead>Response Time</TableHead>
-                      <TableHead>Success Rate</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
+              <div className="rounded-md border">
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="min-w-[180px]">Endpoint Name</TableHead>
+                        <TableHead className="min-w-[250px]">URL</TableHead>
+                        <TableHead className="min-w-[80px]">Method</TableHead>
+                        <TableHead className="min-w-[120px]">Service</TableHead>
+                        <TableHead className="min-w-[80px]">Version</TableHead>
+                        <TableHead className="min-w-[120px]">Response Time</TableHead>
+                        <TableHead className="min-w-[120px]">Success Rate</TableHead>
+                        <TableHead className="min-w-[100px]">Status</TableHead>
+                        <TableHead className="min-w-[120px]">Actions</TableHead>
+                      </TableRow>
+                    </TableHeader>
                   <TableBody>
                     {endpoints.map((endpoint) => (
                       <TableRow key={endpoint.id}>
@@ -509,7 +512,8 @@ export function APIManagement() {
                       </TableRow>
                     ))}
                   </TableBody>
-                </Table>
+                  </Table>
+                </div>
               </div>
             </TabsContent>
             
