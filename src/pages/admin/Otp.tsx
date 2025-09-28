@@ -4,16 +4,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Lock, Mail, Shield, Eye, EyeOff } from 'lucide-react';
+import { Mail, Shield } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import payBazaarLogo from '@/assets/paybazaar-logo.png';
 
-export function LoginPage() {
+export function OtpPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState('');
+  const [otp, setOtp] = useState('');
   const [error, setError] = useState('');
   
   const navigate = useNavigate();
@@ -27,17 +26,17 @@ export function LoginPage() {
     // Simulate authentication
     try {
       // Basic validation
-      if (!email) {
+      if (!otp) {
         setError('Please fill in all fields');
         return;
       }
 
-      if (email === 'admin@paybazaar.com') {
+      if (otp === '123456' ) {
         toast({
-          title: 'Otp Sent Successful',
-          description: 'Please check your email for OTP',
+          title: 'Login Successful',
+          description: 'Welcome to PayBazaar Admin Panel',
         });
-        navigate('/otp');
+        navigate('/admin');
       } else {
         setError('Invalid email or password');
       }
@@ -86,22 +85,22 @@ export function LoginPage() {
               )}
 
               <div className="space-y-2">
-                <Label htmlFor="email">Email Address</Label>
+                <Label htmlFor="email">Enter Otp</Label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   <Input
-                    id="email"
-                    type="email"
-                    placeholder="admin@paybazaar.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    id="otp"
+                    type="text"
+                    placeholder="123456"
+                    value={otp}
+                    onChange={(e) => setOtp(e.target.value)}
                     className="pl-9"
                     required
                   />
                 </div>
               </div>
 
-  
+             
 
               
 
@@ -115,7 +114,7 @@ export function LoginPage() {
 
               <div className="text-center text-sm text-muted-foreground">
                 <p>Demo credentials:</p>
-                <p className="font-mono text-xs">admin@paybazaar.com</p>
+                <p className="font-mono text-xs">123456</p>
               </div>
             </form>
           </CardContent>

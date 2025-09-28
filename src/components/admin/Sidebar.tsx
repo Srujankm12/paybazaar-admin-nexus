@@ -33,6 +33,9 @@ import payBazaarLogo from '@/assets/paybazaar-logo.png';
 const navigation = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
   { name: 'User Management', href: '/admin/users', icon: Users },
+];
+
+const navigations = [
   { name: 'Transaction Logs', href: '/admin/logs', icon: FileText },
   { name: 'Commission System', href: '/admin/commission', icon: DollarSign },
   { name: 'KYC Verification', href: '/admin/kyc', icon: UserCheck },
@@ -183,6 +186,29 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
                   })}
                 </div>
               )}
+              {navigations.map((item) => {
+              const Icon = item.icon;
+              return (
+                <NavLink
+                  key={item.name}
+                  to={item.href}
+                  className={cn(
+                    "group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-200",
+                    isActive(item.href)
+                      ? "gradient-primary text-primary-foreground shadow-glow"
+                      : "text-muted-foreground hover:bg-secondary hover:text-secondary-foreground"
+                  )}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Icon className={cn(
+                    "mr-3 h-5 w-5 flex-shrink-0 transition-colors",
+                    isActive(item.href) ? "text-primary-foreground" : "text-muted-foreground group-hover:text-secondary-foreground"
+                  )} />
+                  {item.name}
+                </NavLink>
+              );
+            })}
+
             </div>
           </nav>
 

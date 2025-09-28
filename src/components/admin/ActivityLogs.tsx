@@ -263,7 +263,7 @@ export function ActivityLogs() {
       </div>
 
       {/* Activity Logs Table */}
-      <Card className="shadow-card">
+      <Card className="shadow-card w-[1200px]">
         <CardHeader>
           <CardTitle className="font-poppins">Activity Logs</CardTitle>
           <CardDescription>View and filter system activity logs</CardDescription>

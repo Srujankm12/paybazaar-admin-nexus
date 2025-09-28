@@ -252,7 +252,7 @@ export function APIManagement() {
   return (
     <div className="space-y-6">
       {/* Page Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <div className="flex flex-col lg:flex-row gap-4">
         <div>
           <h1 className="text-3xl font-bold font-poppins text-foreground">API Management</h1>
           <p className="text-muted-foreground mt-2">Manage API credentials and endpoints</p>
@@ -315,7 +315,7 @@ export function APIManagement() {
       </div>
 
       {/* API Management Tabs */}
-      <Card className="shadow-card">
+      <Card className="shadow-card w-[1215px]">
         <CardHeader>
           <CardTitle className="font-poppins">API Management</CardTitle>
           <CardDescription>Manage API credentials, endpoints, and documentation</CardDescription>
@@ -345,22 +345,21 @@ export function APIManagement() {
                 </div>
 
                 {/* Credentials Table */}
-                <div className="rounded-md border">
-                  <div className="overflow-x-auto">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="min-w-[200px]">Credential Name</TableHead>
-                          <TableHead className="min-w-[150px]">User</TableHead>
-                          <TableHead className="min-w-[120px]">Service Type</TableHead>
-                          <TableHead className="min-w-[120px]">Environment</TableHead>
-                          <TableHead className="min-w-[250px]">API Key</TableHead>
-                          <TableHead className="min-w-[250px]">Secret Key</TableHead>
-                          <TableHead className="min-w-[100px]">Status</TableHead>
-                          <TableHead className="min-w-[120px]">Usage</TableHead>
-                          <TableHead className="min-w-[120px]">Actions</TableHead>
-                        </TableRow>
-                      </TableHeader>
+                <div className="overflow-x-hidden">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Credential Name</TableHead>
+                        <TableHead>User</TableHead>
+                        <TableHead>Service Type</TableHead>
+                        <TableHead>Environment</TableHead>
+                        <TableHead>API Key</TableHead>
+                        <TableHead>Secret Key</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>Usage</TableHead>
+                        <TableHead>Actions</TableHead>
+                      </TableRow>
+                    </TableHeader>
                     <TableBody>
                       {filteredCredentials.map((credential) => (
                         <TableRow key={credential.id}>
@@ -421,41 +420,33 @@ export function APIManagement() {
                                 checked={credential.status === 'active'}
                                 onCheckedChange={() => toggleCredentialStatus(credential.id)}
                               />
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => regenerateCredential(credential.id)}
-                              >
-                                <RefreshCw className="h-4 w-4" />
-                              </Button>
+                             
                             </div>
                           </TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
-                    </Table>
-                  </div>
+                  </Table>
                 </div>
               </div>
             </TabsContent>
             
             <TabsContent value="endpoints" className="mt-6">
-              <div className="rounded-md border">
-                <div className="overflow-x-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="min-w-[180px]">Endpoint Name</TableHead>
-                        <TableHead className="min-w-[250px]">URL</TableHead>
-                        <TableHead className="min-w-[80px]">Method</TableHead>
-                        <TableHead className="min-w-[120px]">Service</TableHead>
-                        <TableHead className="min-w-[80px]">Version</TableHead>
-                        <TableHead className="min-w-[120px]">Response Time</TableHead>
-                        <TableHead className="min-w-[120px]">Success Rate</TableHead>
-                        <TableHead className="min-w-[100px]">Status</TableHead>
-                        <TableHead className="min-w-[120px]">Actions</TableHead>
-                      </TableRow>
-                    </TableHeader>
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Endpoint Name</TableHead>
+                      <TableHead>URL</TableHead>
+                      <TableHead>Method</TableHead>
+                      <TableHead>Service</TableHead>
+                      <TableHead>Version</TableHead>
+                      <TableHead>Response Time</TableHead>
+                      <TableHead>Success Rate</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead>Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
                   <TableBody>
                     {endpoints.map((endpoint) => (
                       <TableRow key={endpoint.id}>
@@ -512,8 +503,7 @@ export function APIManagement() {
                       </TableRow>
                     ))}
                   </TableBody>
-                  </Table>
-                </div>
+                </Table>
               </div>
             </TabsContent>
             

@@ -16,6 +16,7 @@ import { Security } from "./components/admin/Security";
 import { Analytics } from "./components/admin/Analytics";
 import { ActivityLogs } from "./components/admin/ActivityLog";
 import { SupportQueries } from "./components/admin/Support";
+import { OtpPage } from "./pages/admin/Otp";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage />} />
+          <Route path="/otp" element={<OtpPage />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="users" element={<UserManagement />} />

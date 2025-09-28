@@ -248,10 +248,7 @@ export function ActivityLogs() {
                 />
               </PopoverContent>
             </Popover>
-            <Button variant="outline">
-              <Download className="h-4 w-4 mr-2" />
-              Export
-            </Button>
+            
           </div>
 
           <div className="rounded-md border">
@@ -265,7 +262,6 @@ export function ActivityLogs() {
                   <TableHead>Description</TableHead>
                   <TableHead>IP Address</TableHead>
                   <TableHead>Status</TableHead>
-                  <TableHead>Risk Level</TableHead>
                   <TableHead>Timestamp</TableHead>
                 </TableRow>
               </TableHeader>
@@ -295,11 +291,7 @@ export function ActivityLogs() {
                           {log.status}
                         </Badge>
                       </TableCell>
-                      <TableCell>
-                        <Badge className={riskColors[log.riskLevel as keyof typeof riskColors]}>
-                          {log.riskLevel}
-                        </Badge>
-                      </TableCell>
+                      
                       <TableCell className="font-mono text-xs">{log.timestamp}</TableCell>
                     </TableRow>
                   );
