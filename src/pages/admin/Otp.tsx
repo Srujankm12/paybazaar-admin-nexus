@@ -38,7 +38,7 @@ export function OtpPage() {
         });
         navigate('/admin');
       } else {
-        setError('Invalid email or password');
+        setError('Invalid OTP');
       }
     } catch (err) {
       setError('An error occurred during login');
@@ -99,11 +99,6 @@ export function OtpPage() {
                   />
                 </div>
               </div>
-
-             
-
-              
-
               <Button 
                 type="submit" 
                 className="w-full gradient-primary text-primary-foreground shadow-glow"

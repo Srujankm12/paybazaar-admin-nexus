@@ -39,7 +39,7 @@ export function LoginPage() {
         });
         navigate('/otp');
       } else {
-        setError('Invalid email or password');
+        setError('Invalid email ');
       }
     } catch (err) {
       setError('An error occurred during login');

@@ -13,22 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { 
   Download, 
@@ -114,6 +99,54 @@ const mockCredentials: APICredential[] = [
     requestCount: 450,
     rateLimit: 500,
     permissions: ['aeps.withdrawal', 'aeps.balance', 'aeps.mini_statement']
+  },
+  {
+    id: 'API002',
+    name: 'Sandbox AEPS API',
+    apiKey: 'pk_test_yzab7890cdef1234ghij',
+    secretKey: 'sk_test_klmn5678opqr9012stuv',
+    userId: 'DT005',
+    userName: 'Priya Sharma',
+    serviceType: 'AEPS',
+    environment: 'sandbox',
+    status: 'active',
+    createdDate: '2024-01-10T09:00:00Z',
+    lastUsed: '2024-01-19T11:15:00Z',
+    requestCount: 450,
+    rateLimit: 500,
+    permissions: ['aeps.withdrawal', 'aeps.balance', 'aeps.mini_statement']
+  },
+  {
+    id: 'API002',
+    name: 'Sandbox AEPS API',
+    apiKey: 'pk_test_yzab7890cdef1234ghij',
+    secretKey: 'sk_test_klmn5678opqr9012stuv',
+    userId: 'DT005',
+    userName: 'Priya Sharma',
+    serviceType: 'AEPS',
+    environment: 'sandbox',
+    status: 'active',
+    createdDate: '2024-01-10T09:00:00Z',
+    lastUsed: '2024-01-19T11:15:00Z',
+    requestCount: 450,
+    rateLimit: 500,
+    permissions: ['aeps.withdrawal', 'aeps.balance', 'aeps.mini_statement']
+  },
+  {
+    id: 'API002',
+    name: 'Sandbox AEPS API',
+    apiKey: 'pk_test_yzab7890cdef1234ghij',
+    secretKey: 'sk_test_klmn5678opqr9012stuv',
+    userId: 'DT005',
+    userName: 'Priya Sharma',
+    serviceType: 'AEPS',
+    environment: 'sandbox',
+    status: 'active',
+    createdDate: '2024-01-10T09:00:00Z',
+    lastUsed: '2024-01-19T11:15:00Z',
+    requestCount: 450,
+    rateLimit: 500,
+    permissions: ['aeps.withdrawal', 'aeps.balance', 'aeps.mini_statement']
   }
 ];
 
@@ -143,6 +176,50 @@ const mockEndpoints: APIEndpoint[] = [
     lastUpdate: '2024-01-12T14:30:00Z'
   },
   {
+    id: 'EP003',
+    name: 'Bill Payment',
+    endpoint: '/api/v1/bills/pay',
+    method: 'POST',
+    serviceType: 'BILL_PAYMENT',
+    status: 'maintenance',
+    version: 'v1.0.5',
+    responseTime: 2100,
+    successRate: 98.2,
+    lastUpdate: '2024-01-18T09:00:00Z'
+  },  {
+    id: 'EP003',
+    name: 'Bill Payment',
+    endpoint: '/api/v1/bills/pay',
+    method: 'POST',
+    serviceType: 'BILL_PAYMENT',
+    status: 'maintenance',
+    version: 'v1.0.5',
+    responseTime: 2100,
+    successRate: 98.2,
+    lastUpdate: '2024-01-18T09:00:00Z'
+  },  {
+    id: 'EP003',
+    name: 'Bill Payment',
+    endpoint: '/api/v1/bills/pay',
+    method: 'POST',
+    serviceType: 'BILL_PAYMENT',
+    status: 'maintenance',
+    version: 'v1.0.5',
+    responseTime: 2100,
+    successRate: 98.2,
+    lastUpdate: '2024-01-18T09:00:00Z'
+  },  {
+    id: 'EP003',
+    name: 'Bill Payment',
+    endpoint: '/api/v1/bills/pay',
+    method: 'POST',
+    serviceType: 'BILL_PAYMENT',
+    status: 'maintenance',
+    version: 'v1.0.5',
+    responseTime: 2100,
+    successRate: 98.2,
+    lastUpdate: '2024-01-18T09:00:00Z'
+  },  {
     id: 'EP003',
     name: 'Bill Payment',
     endpoint: '/api/v1/bills/pay',
@@ -249,126 +326,118 @@ export function APIManagement() {
     activeEndpoints: endpoints.filter(e => e.status === 'active').length,
   };
 
-  return (
-    <div className="space-y-6">
-      {/* Page Header */}
-      <div className="flex flex-col lg:flex-row gap-4">
-        <div>
-          <h1 className="text-3xl font-bold font-poppins text-foreground">API Management</h1>
-          <p className="text-muted-foreground mt-2">Manage API credentials and endpoints</p>
-        </div>
-        <div className="flex flex-wrap gap-3">
-        
-          <Button className="gradient-primary text-primary-foreground shadow-glow">
-            <Plus className="mr-2 h-4 w-4" />
-            Generate API Key
-          </Button>
-        </div>
+return (
+  <div className="space-y-6">
+    {/* Page Header */}
+    <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <div>
+        <h1 className="text-3xl font-bold font-poppins text-foreground">API Management</h1>
+        <p className="text-muted-foreground mt-2">Manage API credentials and endpoints</p>
       </div>
-
-      {/* Stats Overview */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="shadow-card">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">Total Credentials</p>
-                <p className="text-2xl font-bold font-poppins text-foreground">{stats.totalCredentials}</p>
-              </div>
-              <Key className="h-5 w-5 text-primary" />
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="shadow-card">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">Active Credentials</p>
-                <p className="text-2xl font-bold font-poppins text-foreground">{stats.activeCredentials}</p>
-              </div>
-              <CheckCircle className="h-5 w-5 text-success" />
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="shadow-card">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">Total Endpoints</p>
-                <p className="text-2xl font-bold font-poppins text-foreground">{stats.totalEndpoints}</p>
-              </div>
-              <Globe className="h-5 w-5 text-accent" />
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="shadow-card">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">API Uptime</p>
-                <p className="text-2xl font-bold font-poppins text-foreground">99.8%</p>
-              </div>
-              <Activity className="h-5 w-5 text-success" />
-            </div>
-          </CardContent>
-        </Card>
+      <div className="flex flex-wrap gap-3">
+        <Button className="gradient-primary text-primary-foreground shadow-glow">
+          <Plus className="mr-2 h-4 w-4" />
+          Generate API Key
+        </Button>
       </div>
+    </div>
 
-      {/* API Management Tabs */}
-      <Card className="shadow-card w-[1215px]">
-        <CardHeader>
-          <CardTitle className="font-poppins">API Management</CardTitle>
-          <CardDescription>Manage API credentials, endpoints, and documentation</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Tabs defaultValue="credentials" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="credentials">API Credentials</TabsTrigger>
-              <TabsTrigger value="endpoints">Endpoints</TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="credentials" className="mt-6">
-              <div className="space-y-4">
-                {/* Search */}
-                <div className="flex flex-col lg:flex-row gap-4">
-                  <div className="flex-1">
-                    <div className="relative">
-                      <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                      <Input
-                        placeholder="Search credentials..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        className="pl-9"
-                      />
-                    </div>
+    {/* Stats Overview */}
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <Card className="shadow-card">
+        <CardContent className="p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-muted-foreground">Total Credentials</p>
+              <p className="text-2xl font-bold font-poppins text-foreground">{stats.totalCredentials}</p>
+            </div>
+            <Key className="h-5 w-5 text-primary" />
+          </div>
+        </CardContent>
+      </Card>
+      <Card className="shadow-card">
+        <CardContent className="p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-muted-foreground">Active Credentials</p>
+              <p className="text-2xl font-bold font-poppins text-foreground">{stats.activeCredentials}</p>
+            </div>
+            <CheckCircle className="h-5 w-5 text-success" />
+          </div>
+        </CardContent>
+      </Card>
+      <Card className="shadow-card">
+        <CardContent className="p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-muted-foreground">Total Endpoints</p>
+              <p className="text-2xl font-bold font-poppins text-foreground">{stats.totalEndpoints}</p>
+            </div>
+            <Globe className="h-5 w-5 text-accent" />
+          </div>
+        </CardContent>
+      </Card>
+      <Card className="shadow-card">
+        <CardContent className="p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-muted-foreground">API Uptime</p>
+              <p className="text-2xl font-bold font-poppins text-foreground">99.8%</p>
+            </div>
+            <Activity className="h-5 w-5 text-success" />
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+
+    {/* API Management Tabs */}
+    <Card className="shadow-card w-[400px] md:w-[1150px]">
+      <CardHeader>
+        <CardTitle className="font-poppins">API Management</CardTitle>
+        <CardDescription>Manage API credentials, endpoints, and documentation</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Tabs defaultValue="credentials" className="w-full">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="credentials">API Credentials</TabsTrigger>
+            <TabsTrigger value="endpoints">Endpoints</TabsTrigger>
+          </TabsList>
+
+          {/* Credentials Tab */}
+          <TabsContent value="credentials" className="mt-6">
+            <div className="space-y-4">
+              {/* Search */}
+              <div className="flex flex-col lg:flex-row gap-4">
+                <div className="flex-1">
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                    <Input
+                      placeholder="Search credentials..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="pl-9"
+                    />
                   </div>
                 </div>
+              </div>
 
                 {/* Credentials Table */}
                 <div className="overflow-x-hidden">
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead>Credential Name</TableHead>
                         <TableHead>User</TableHead>
                         <TableHead>Service Type</TableHead>
                         <TableHead>Environment</TableHead>
                         <TableHead>API Key</TableHead>
-                        <TableHead>Secret Key</TableHead>
                         <TableHead>Status</TableHead>
-                        <TableHead>Usage</TableHead>
                         <TableHead>Actions</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {filteredCredentials.map((credential) => (
                         <TableRow key={credential.id}>
-                          <TableCell>
-                            <div className="flex items-center space-x-2">
-                              <Key className="h-4 w-4 text-primary" />
-                              <span className="font-medium">{credential.name}</span>
-                            </div>
-                          </TableCell>
+                         
                           <TableCell>
                             <div>
                               <p className="font-medium">{credential.userName}</p>
@@ -393,27 +462,9 @@ export function APIManagement() {
                               </Button>
                             </div>
                           </TableCell>
-                          <TableCell>
-                            <div className="flex items-center space-x-2">
-                              <code className="text-xs bg-muted px-2 py-1 rounded">
-                                {showSecrets[credential.id] ? credential.secretKey : '••••••••••••••••••••'}
-                              </code>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => setShowSecrets(prev => ({ ...prev, [credential.id]: !prev[credential.id] }))}
-                              >
-                                {showSecrets[credential.id] ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
-                              </Button>
-                            </div>
-                          </TableCell>
+                          
                           <TableCell>{getStatusBadge(credential.status)}</TableCell>
-                          <TableCell>
-                            <div className="text-sm">
-                              <p>{credential.requestCount} / {credential.rateLimit}</p>
-                              <p className="text-muted-foreground">requests</p>
-                            </div>
-                          </TableCell>
+                         
                           <TableCell>
                             <div className="flex items-center space-x-2">
                               <Switch
@@ -440,9 +491,6 @@ export function APIManagement() {
                       <TableHead>URL</TableHead>
                       <TableHead>Method</TableHead>
                       <TableHead>Service</TableHead>
-                      <TableHead>Version</TableHead>
-                      <TableHead>Response Time</TableHead>
-                      <TableHead>Success Rate</TableHead>
                       <TableHead>Status</TableHead>
                       <TableHead>Actions</TableHead>
                     </TableRow>
@@ -475,19 +523,7 @@ export function APIManagement() {
                         <TableCell>
                           <Badge variant="outline">{endpoint.serviceType}</Badge>
                         </TableCell>
-                        <TableCell className="font-mono text-sm">{endpoint.version}</TableCell>
-                        <TableCell className="font-mono text-sm">{endpoint.responseTime}ms</TableCell>
-                        <TableCell>
-                          <div className="flex items-center space-x-2">
-                            <span className="font-mono text-sm">{endpoint.successRate}%</span>
-                            <div 
-                              className={`w-2 h-2 rounded-full ${
-                                endpoint.successRate >= 99 ? 'bg-success' :
-                                endpoint.successRate >= 95 ? 'bg-warning' : 'bg-destructive'
-                              }`}
-                            />
-                          </div>
-                        </TableCell>
+                        
                         <TableCell>{getStatusBadge(endpoint.status)}</TableCell>
                         <TableCell>
                           <div className="flex items-center space-x-2">
