@@ -325,14 +325,17 @@ export function APIManagement() {
     totalEndpoints: endpoints.length,
     activeEndpoints: endpoints.filter(e => e.status === 'active').length,
   };
-
-return (
+  return (
   <div className="space-y-6">
     {/* Page Header */}
     <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
       <div>
-        <h1 className="text-3xl font-bold font-poppins text-foreground">API Management</h1>
-        <p className="text-muted-foreground mt-2">Manage API credentials and endpoints</p>
+        <h1 className="text-3xl font-bold font-poppins text-foreground">
+          API Management
+        </h1>
+        <p className="text-muted-foreground mt-2">
+          Manage API credentials and endpoints
+        </p>
       </div>
       <div className="flex flex-wrap gap-3">
         <Button className="gradient-primary text-primary-foreground shadow-glow">
@@ -348,41 +351,60 @@ return (
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-muted-foreground">Total Credentials</p>
-              <p className="text-2xl font-bold font-poppins text-foreground">{stats.totalCredentials}</p>
+              <p className="text-sm font-medium text-muted-foreground">
+                Total Credentials
+              </p>
+              <p className="text-2xl font-bold font-poppins text-foreground">
+                {stats.totalCredentials}
+              </p>
             </div>
             <Key className="h-5 w-5 text-primary" />
           </div>
         </CardContent>
       </Card>
+
       <Card className="shadow-card">
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-muted-foreground">Active Credentials</p>
-              <p className="text-2xl font-bold font-poppins text-foreground">{stats.activeCredentials}</p>
+              <p className="text-sm font-medium text-muted-foreground">
+                Active Credentials
+              </p>
+              <p className="text-2xl font-bold font-poppins text-foreground">
+                {stats.activeCredentials}
+              </p>
             </div>
             <CheckCircle className="h-5 w-5 text-success" />
           </div>
         </CardContent>
       </Card>
+
       <Card className="shadow-card">
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-muted-foreground">Total Endpoints</p>
-              <p className="text-2xl font-bold font-poppins text-foreground">{stats.totalEndpoints}</p>
+              <p className="text-sm font-medium text-muted-foreground">
+                Total Endpoints
+              </p>
+              <p className="text-2xl font-bold font-poppins text-foreground">
+                {stats.totalEndpoints}
+              </p>
             </div>
             <Globe className="h-5 w-5 text-accent" />
           </div>
         </CardContent>
       </Card>
+
       <Card className="shadow-card">
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-muted-foreground">API Uptime</p>
-              <p className="text-2xl font-bold font-poppins text-foreground">99.8%</p>
+              <p className="text-sm font-medium text-muted-foreground">
+                API Uptime
+              </p>
+              <p className="text-2xl font-bold font-poppins text-foreground">
+                99.8%
+              </p>
             </div>
             <Activity className="h-5 w-5 text-success" />
           </div>
@@ -391,10 +413,13 @@ return (
     </div>
 
     {/* API Management Tabs */}
-    <Card className="shadow-card w-[400px] md:w-[1150px]">
+  <Card className="shadow-card w-full">
+
       <CardHeader>
-        <CardTitle className="font-poppins">API Management</CardTitle>
-        <CardDescription>Manage API credentials, endpoints, and documentation</CardDescription>
+        <CardTitle>API Management</CardTitle>
+        <CardDescription>
+          Manage API credentials, endpoints, and documentation
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="credentials" className="w-full">
@@ -421,119 +446,67 @@ return (
                 </div>
               </div>
 
-                {/* Credentials Table */}
-                <div className="overflow-x-hidden">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>User</TableHead>
-                        <TableHead>Service Type</TableHead>
-                        <TableHead>Environment</TableHead>
-                        <TableHead>API Key</TableHead>
-                        <TableHead>Status</TableHead>
-                        <TableHead>Actions</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {filteredCredentials.map((credential) => (
-                        <TableRow key={credential.id}>
-                         
-                          <TableCell>
-                            <div>
-                              <p className="font-medium">{credential.userName}</p>
-                              <p className="text-sm text-muted-foreground">{credential.userId}</p>
-                            </div>
-                          </TableCell>
-                          <TableCell>
-                            <Badge variant="outline">{credential.serviceType}</Badge>
-                          </TableCell>
-                          <TableCell>{getEnvironmentBadge(credential.environment)}</TableCell>
-                          <TableCell>
-                            <div className="flex items-center space-x-2">
-                              <code className="text-xs bg-muted px-2 py-1 rounded">
-                                {showSecrets[credential.id] ? credential.apiKey : '••••••••••••••••••••'}
-                              </code>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => copyToClipboard(credential.apiKey, 'API Key')}
-                              >
-                                <Copy className="h-3 w-3" />
-                              </Button>
-                            </div>
-                          </TableCell>
-                          
-                          <TableCell>{getStatusBadge(credential.status)}</TableCell>
-                         
-                          <TableCell>
-                            <div className="flex items-center space-x-2">
-                              <Switch
-                                checked={credential.status === 'active'}
-                                onCheckedChange={() => toggleCredentialStatus(credential.id)}
-                              />
-                             
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </div>
-              </div>
-            </TabsContent>
-            
-            <TabsContent value="endpoints" className="mt-6">
+              {/* Credentials Table */}
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Endpoint Name</TableHead>
-                      <TableHead>URL</TableHead>
-                      <TableHead>Method</TableHead>
-                      <TableHead>Service</TableHead>
+                      <TableHead>User</TableHead>
+                      <TableHead>Service Type</TableHead>
+                      <TableHead>Environment</TableHead>
+                      <TableHead>API Key</TableHead>
                       <TableHead>Status</TableHead>
                       <TableHead>Actions</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {endpoints.map((endpoint) => (
-                      <TableRow key={endpoint.id}>
+                    {filteredCredentials.map((credential) => (
+                      <TableRow key={credential.id}>
                         <TableCell>
-                          <div className="flex items-center space-x-2">
-                            <Code className="h-4 w-4 text-primary" />
-                            <span className="font-medium">{endpoint.name}</span>
+                          <div>
+                            <p className="font-medium">{credential.userName}</p>
+                            <p className="text-sm text-muted-foreground">
+                              {credential.userId}
+                            </p>
                           </div>
                         </TableCell>
                         <TableCell>
-                          <code className="text-xs bg-muted px-2 py-1 rounded">{endpoint.endpoint}</code>
-                        </TableCell>
-                        <TableCell>
-                          <Badge 
-                            variant={endpoint.method === 'GET' ? 'secondary' : 'default'}
-                            className={
-                              endpoint.method === 'POST' ? 'bg-success text-success-foreground' :
-                              endpoint.method === 'PUT' ? 'bg-warning text-warning-foreground' :
-                              endpoint.method === 'DELETE' ? 'bg-destructive text-destructive-foreground' :
-                              ''
-                            }
-                          >
-                            {endpoint.method}
+                          <Badge variant="outline">
+                            {credential.serviceType}
                           </Badge>
                         </TableCell>
                         <TableCell>
-                          <Badge variant="outline">{endpoint.serviceType}</Badge>
+                          {getEnvironmentBadge(credential.environment)}
                         </TableCell>
-                        
-                        <TableCell>{getStatusBadge(endpoint.status)}</TableCell>
+                        <TableCell>
+                          <div className="flex items-center space-x-2">
+                            <code className="text-xs bg-muted px-2 py-1 rounded">
+                              {showSecrets[credential.id]
+                                ? credential.apiKey
+                                : "••••••••••••••••••••"}
+                            </code>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() =>
+                                copyToClipboard(credential.apiKey, "API Key")
+                              }
+                            >
+                              <Copy className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          {getStatusBadge(credential.status)}
+                        </TableCell>
                         <TableCell>
                           <div className="flex items-center space-x-2">
                             <Switch
-                              checked={endpoint.status === 'active'}
-                              onCheckedChange={() => toggleEndpointStatus(endpoint.id)}
+                              checked={credential.status === "active"}
+                              onCheckedChange={() =>
+                                toggleCredentialStatus(credential.id)
+                              }
                             />
-                            <Button variant="outline" size="sm">
-                              <Eye className="h-4 w-4" />
-                            </Button>
                           </div>
                         </TableCell>
                       </TableRow>
@@ -541,12 +514,82 @@ return (
                   </TableBody>
                 </Table>
               </div>
-            </TabsContent>
-            
-            
-          </Tabs>
-        </CardContent>
-      </Card>
-    </div>
-  );
+            </div>
+          </TabsContent>
+
+          {/* Endpoints Tab */}
+          <TabsContent value="endpoints" className="mt-6">
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Endpoint Name</TableHead>
+                    <TableHead>URL</TableHead>
+                    <TableHead>Method</TableHead>
+                    <TableHead>Service</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead>Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {endpoints.map((endpoint) => (
+                    <TableRow key={endpoint.id}>
+                      <TableCell>
+                        <div className="flex items-center space-x-2">
+                          <Code className="h-4 w-4 text-primary" />
+                          <span className="font-medium">{endpoint.name}</span>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <code className="text-xs bg-muted px-2 py-1 rounded">
+                          {endpoint.endpoint}
+                        </code>
+                      </TableCell>
+                      <TableCell>
+                        <Badge
+                          variant={
+                            endpoint.method === "GET" ? "secondary" : "default"
+                          }
+                          className={
+                            endpoint.method === "POST"
+                              ? "bg-success text-success-foreground"
+                              : endpoint.method === "PUT"
+                              ? "bg-warning text-warning-foreground"
+                              : endpoint.method === "DELETE"
+                              ? "bg-destructive text-destructive-foreground"
+                              : ""
+                          }
+                        >
+                          {endpoint.method}
+                        </Badge>
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant="outline">{endpoint.serviceType}</Badge>
+                      </TableCell>
+                      <TableCell>{getStatusBadge(endpoint.status)}</TableCell>
+                      <TableCell>
+                        <div className="flex items-center space-x-2">
+                          <Switch
+                            checked={endpoint.status === "active"}
+                            onCheckedChange={() =>
+                              toggleEndpointStatus(endpoint.id)
+                            }
+                          />
+                          <Button variant="outline" size="sm">
+                            <Eye className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </TabsContent>
+        </Tabs>
+      </CardContent>
+    </Card>
+  </div>
+);
+
 }
