@@ -18,6 +18,9 @@ import { Analytics } from "./components/admin/Analytics"
 import { ActivityLogs } from "./components/admin/ActivityLog"
 import { SupportQueries } from "./components/admin/Support"
 import { OtpPage } from "./pages/admin/Otp"
+import paybazaarLogo from "./assets/paybazaar-logo.png"
+
+
 
 const queryClient = new QueryClient()
 
@@ -38,11 +41,11 @@ const App = () => {
       <div className="flex items-center justify-center h-screen bg-muted px-6">
         <div className="text-center max-w-md space-y-4">
           {/* Logo */}
-          <img
-            src="/src/assets/paybazaar-logo.png"
-            alt="Paybazaar Logo"
-            className="mx-auto w-32 h-auto"
-          />
+ 
+
+<img src={paybazaarLogo} alt="Paybazaar Logo" className="mx-auto w-32 h-auto" />
+
+
           {/* Title */}
           <h1 className="text-2xl font-semibold text-foreground">
             Access Restricted
