@@ -35,10 +35,24 @@ const App = () => {
 
   if (isMobile) {
     return (
-      <div className="flex items-center justify-center h-screen bg-gray-100">
-        <h1 className="text-xl font-bold text-red-600 text-center px-4">
-           Cannot access on mobile. Please use a laptop or PC.
-        </h1>
+      <div className="flex items-center justify-center h-screen bg-muted px-6">
+        <div className="text-center max-w-md space-y-4">
+          {/* Logo */}
+          <img
+            src="/src/assets/paybazaar-logo.png"
+            alt="Paybazaar Logo"
+            className="mx-auto w-32 h-auto"
+          />
+          {/* Title */}
+          <h1 className="text-2xl font-semibold text-foreground">
+            Access Restricted
+          </h1>
+          {/* Message */}
+          <p className="mt-2 text-muted-foreground">
+            This application is optimized for desktop and laptop devices.  
+            Please switch to a larger screen to continue.
+          </p>
+        </div>
       </div>
     )
   }
@@ -52,6 +66,9 @@ const App = () => {
           <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route path="/otp" element={<OtpPage />} />
+            
+
+
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<Dashboard />} />
               <Route path="users" element={<UserManagement />} />
@@ -64,7 +81,7 @@ const App = () => {
               <Route path="analytics" element={<Analytics />} />
               <Route path="security" element={<Security />} />
             </Route>
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
