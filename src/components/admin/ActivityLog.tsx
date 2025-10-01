@@ -36,42 +36,8 @@ const mockActivityLogs = [
     status: 'Success',
     riskLevel: 'Medium',
   },
-  {
-    id: 'LOG003',
-    user: 'Mike Johnson',
-    userType: 'Retailer',
-    action: 'Failed Login Attempt',
-    category: 'Authentication',
-    description: 'Multiple failed login attempts detected',
-    ipAddress: '192.168.1.102',
-    timestamp: '2024-01-15 10:20:08',
-    status: 'Failed',
-    riskLevel: 'High',
-  },
-  {
-    id: 'LOG004',
-    user: 'Admin User',
-    userType: 'Admin',
-    action: 'User Block',
-    category: 'User Management',
-    description: 'Blocked user account: retailer@example.com',
-    ipAddress: '192.168.1.1',
-    timestamp: '2024-01-15 10:15:33',
-    status: 'Success',
-    riskLevel: 'Medium',
-  },
-  {
-    id: 'LOG005',
-    user: 'System',
-    userType: 'System',
-    action: 'API Key Generated',
-    category: 'API Management',
-    description: 'New API key generated for AEPS service',
-    ipAddress: '127.0.0.1',
-    timestamp: '2024-01-15 10:10:19',
-    status: 'Success',
-    riskLevel: 'Low',
-  },
+
+
 ];
 
 const statusColors = {
@@ -119,188 +85,182 @@ export function ActivityLogs() {
     failed: mockActivityLogs.filter(log => log.status === 'Failed').length,
     highRisk: mockActivityLogs.filter(log => log.riskLevel === 'High').length,
   };
+return (
+  <div className="space-y-6">
+    <div>
+      <h1 className="text-3xl font-bold tracking-tight">Activity Logs</h1>
+      <p className="text-muted-foreground">Monitor and audit all system activities</p>
+    </div>
 
-  return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">Activity Logs</h1>
-        <p className="text-muted-foreground">Monitor and audit all system activities</p>
-      </div>
-
-      {/* Stats Cards */}
-      <div className="grid gap-4 md:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Activities</CardTitle>
-            <Activity className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{stats.total}</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Successful</CardTitle>
-            <Activity className="h-4 w-4 text-green-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-green-600">{stats.success}</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Failed</CardTitle>
-            <Activity className="h-4 w-4 text-red-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-red-600">{stats.failed}</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">High Risk</CardTitle>
-            <Shield className="h-4 w-4 text-red-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-red-600">{stats.highRisk}</div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Filters */}
+    {/* Stats Cards */}
+    <div className="grid gap-4 md:grid-cols-4">
       <Card>
-        <CardHeader>
-          <CardTitle>Activity Logs</CardTitle>
-          <CardDescription>Filter and monitor system activities</CardDescription>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium">Total Activities</CardTitle>
+          <Activity className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="flex flex-col lg:flex-row gap-4 mb-6">
-            <div className="relative flex-1">
-              <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Search activities..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-8"
-              />
-            </div>
-            <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-              <SelectTrigger className="lg:w-[180px]">
-                <SelectValue placeholder="All Categories" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Categories</SelectItem>
-                <SelectItem value="Authentication">Authentication</SelectItem>
-                <SelectItem value="Transaction">Transaction</SelectItem>
-                <SelectItem value="User Management">User Management</SelectItem>
-                <SelectItem value="API Management">API Management</SelectItem>
-                <SelectItem value="System">System</SelectItem>
-              </SelectContent>
-            </Select>
-            <Select value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTrigger className="lg:w-[140px]">
-                <SelectValue placeholder="All Status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Status</SelectItem>
-                <SelectItem value="Success">Success</SelectItem>
-                <SelectItem value="Failed">Failed</SelectItem>
-                <SelectItem value="Warning">Warning</SelectItem>
-              </SelectContent>
-            </Select>
-            <Select value={riskFilter} onValueChange={setRiskFilter}>
-              <SelectTrigger className="lg:w-[140px]">
-                <SelectValue placeholder="All Risk" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Risk</SelectItem>
-                <SelectItem value="Low">Low</SelectItem>
-                <SelectItem value="Medium">Medium</SelectItem>
-                <SelectItem value="High">High</SelectItem>
-              </SelectContent>
-            </Select>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button variant="outline" className="lg:w-[200px] justify-start text-left font-normal">
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {dateRange?.from ? (
-                    dateRange.to ? (
-                      <>
-                        {format(dateRange.from, "LLL dd, y")} -{" "}
-                        {format(dateRange.to, "LLL dd, y")}
-                      </>
-                    ) : (
-                      format(dateRange.from, "LLL dd, y")
-                    )
-                  ) : (
-                    <span>Pick a date range</span>
-                  )}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  initialFocus
-                  mode="range"
-                  defaultMonth={dateRange?.from}
-                  selected={dateRange}
-                  onSelect={setDateRange}
-                  numberOfMonths={2}
-                />
-              </PopoverContent>
-            </Popover>
-            
-          </div>
-
-          <div className="rounded-md border">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Log ID</TableHead>
-                  <TableHead>User</TableHead>
-                  <TableHead>Action</TableHead>
-                  <TableHead>Category</TableHead>
-                  <TableHead>Description</TableHead>
-                  <TableHead>IP Address</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Timestamp</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredLogs.map((log) => {
-                  const IconComponent = categoryIcons[log.category as keyof typeof categoryIcons] || Activity;
-                  return (
-                    <TableRow key={log.id}>
-                      <TableCell className="font-medium">{log.id}</TableCell>
-                      <TableCell>
-                        <div>
-                          <div className="font-medium">{log.user}</div>
-                          <div className="text-xs text-muted-foreground">{log.userType}</div>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          <IconComponent className="h-4 w-4 text-muted-foreground" />
-                          {log.action}
-                        </div>
-                      </TableCell>
-                      <TableCell>{log.category}</TableCell>
-                      <TableCell className="max-w-xs truncate">{log.description}</TableCell>
-                      <TableCell className="font-mono text-xs">{log.ipAddress}</TableCell>
-                      <TableCell>
-                        <Badge className={statusColors[log.status as keyof typeof statusColors]}>
-                          {log.status}
-                        </Badge>
-                      </TableCell>
-                      
-                      <TableCell className="font-mono text-xs">{log.timestamp}</TableCell>
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </div>
+          <div className="text-2xl font-bold">{stats.total}</div>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium">Successful</CardTitle>
+          <Activity className="h-4 w-4 text-green-500" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold text-green-600">{stats.success}</div>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium">Failed</CardTitle>
+          <Activity className="h-4 w-4 text-red-500" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold text-red-600">{stats.failed}</div>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium">High Risk</CardTitle>
+          <Shield className="h-4 w-4 text-red-500" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold text-red-600">{stats.highRisk}</div>
         </CardContent>
       </Card>
     </div>
-  );
+
+    {/* Filters */}
+    <Card>
+      <CardHeader>
+        <CardTitle>Activity Logs</CardTitle>
+        <CardDescription>Filter and monitor system activities</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="flex flex-col lg:flex-row gap-4 mb-6">
+          <div className="relative flex-1">
+            <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Search activities..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-8"
+            />
+          </div>
+          <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+            <SelectTrigger className="lg:w-[180px]">
+              <SelectValue placeholder="All Categories" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Categories</SelectItem>
+              <SelectItem value="Authentication">Authentication</SelectItem>
+              <SelectItem value="Transaction">Transaction</SelectItem>
+              <SelectItem value="User Management">User Management</SelectItem>
+              <SelectItem value="API Management">API Management</SelectItem>
+              <SelectItem value="System">System</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select value={statusFilter} onValueChange={setStatusFilter}>
+            <SelectTrigger className="lg:w-[140px]">
+              <SelectValue placeholder="All Status" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Status</SelectItem>
+              <SelectItem value="Success">Success</SelectItem>
+              <SelectItem value="Failed">Failed</SelectItem>
+              <SelectItem value="Warning">Warning</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select value={riskFilter} onValueChange={setRiskFilter}>
+            <SelectTrigger className="lg:w-[140px]">
+              <SelectValue placeholder="All Risk" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Risk</SelectItem>
+              <SelectItem value="Low">Low</SelectItem>
+              <SelectItem value="Medium">Medium</SelectItem>
+              <SelectItem value="High">High</SelectItem>
+            </SelectContent>
+          </Select>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="outline" className="lg:w-[200px] justify-start text-left font-normal">
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {dateRange?.from ? (
+                  dateRange.to ? (
+                    <>
+                      {format(dateRange.from, "LLL dd, y")} -{" "}
+                      {format(dateRange.to, "LLL dd, y")}
+                    </>
+                  ) : (
+                    format(dateRange.from, "LLL dd, y")
+                  )
+                ) : (
+                  <span>Pick a date range</span>
+                )}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                initialFocus
+                mode="range"
+                defaultMonth={dateRange?.from}
+                selected={dateRange}
+                onSelect={setDateRange}
+                numberOfMonths={2}
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
+
+        {/* Table without IP + Timestamp */}
+        <div className="rounded-md border overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Log ID</TableHead>
+                <TableHead>User</TableHead>
+                <TableHead>Action</TableHead>
+                <TableHead>Category</TableHead>
+                <TableHead>Description</TableHead>
+                <TableHead>Status</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filteredLogs.map((log) => {
+                const IconComponent = categoryIcons[log.category as keyof typeof categoryIcons] || Activity;
+                return (
+                  <TableRow key={log.id}>
+                    <TableCell className="font-medium">{log.id}</TableCell>
+                    <TableCell>
+                      <div>
+                        <div className="font-medium">{log.user}</div>
+                        <div className="text-xs text-muted-foreground">{log.userType}</div>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        <IconComponent className="h-4 w-4 text-muted-foreground" />
+                        {log.action}
+                      </div>
+                    </TableCell>
+                    <TableCell>{log.category}</TableCell>
+                    <TableCell className="max-w-xs truncate">{log.description}</TableCell>
+                    <TableCell>
+                      <Badge className={statusColors[log.status as keyof typeof statusColors]}>
+                        {log.status}
+                      </Badge>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </div>
+      </CardContent>
+    </Card>
+  </div>
+);
 }
